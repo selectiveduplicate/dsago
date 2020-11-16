@@ -20,12 +20,14 @@ func newStack(size int) *stack {
 }
 
 // pushes an element into stack
-func (s *stack) Push(element Types) error {
+func (s *stack) Push(elements ...Types) error {
 	if s.top == cap(s.data) {
 		return errors.New("Stack is full")
 	}
-	s.data[s.top] = element
-	s.top++
+	for _, element := range elements {
+		s.data[s.top] = element
+		s.top++
+	}
 	return nil
 }
 
@@ -48,11 +50,7 @@ func (s *stack) See() {
 
 func main() {
 	aStack := newStack(5)
-	aStack.Push(200)
-	aStack.Push(400.23)
-	aStack.Push(350)
-	aStack.Push("Kafka")
-	aStack.Push(5324)
+	aStack.Push(10, 400, 23, "Kafka", 2020)
 	aStack.Pop()
 	aStack.See()
 }
