@@ -5,19 +5,22 @@ import (
 	"fmt"
 )
 
+// Types interface for holding various data types in the stack
+type Types interface{}
+
 // Stack defines a stack data structure
 type stack struct {
-	data []int
+	data []Types
 	top  int
 }
 
 // returns pointer to a new stack with requested size
 func newStack(size int) *stack {
-	return &stack{make([]int, size), 0}
+	return &stack{make([]Types, size), 0}
 }
 
 // pushes an element into stack
-func (s *stack) Push(element int) error {
+func (s *stack) Push(element Types) error {
 	if s.top == cap(s.data) {
 		return errors.New("Stack is full")
 	}
@@ -27,7 +30,7 @@ func (s *stack) Push(element int) error {
 }
 
 // pops an element
-func (s *stack) Pop() (int, error) {
+func (s *stack) Pop() (Types, error) {
 	if s.top == 0 {
 		return 0, errors.New("Empty stack")
 	}
@@ -46,9 +49,10 @@ func (s *stack) See() {
 func main() {
 	aStack := newStack(5)
 	aStack.Push(200)
-	aStack.Push(400)
+	aStack.Push(400.23)
 	aStack.Push(350)
-	aStack.Push(610)
+	aStack.Push("Kafka")
 	aStack.Push(5324)
+	aStack.Pop()
 	aStack.See()
 }
