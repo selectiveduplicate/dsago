@@ -41,7 +41,7 @@ func (s *stack) Pop() (Types, error) {
 
 // prints the stack
 func (s *stack) See() {
-	for _, elements := range s.data {
+	for _, elements := range s.data[:s.top] {
 		fmt.Println(elements)
 	}
 }
