@@ -37,7 +37,7 @@ func TestMaxHeapify(t *testing.T) {
 	var heap = []int{0, 10, 5, 20, 4, 3, 1, 15}
 
 	want := []int{0, 20, 5, 15, 4, 3, 1, 10}
-	maxHeapify(&heap, 8, 1)
+	maxHeapify(&heap, len(heap)-1, 1)
 
 	if !reflect.DeepEqual(want, heap) {
 		t.Errorf("wanted heap %v got %v", want, heap)
@@ -49,6 +49,28 @@ func TestBuildMaxHeap(t *testing.T) {
 
 	want := []int{0, 20, 5, 15, 4, 3, 1, 10}
 	buildMaxHeap(&heap, len(heap)-1)
+
+	if !reflect.DeepEqual(want, heap) {
+		t.Errorf("wanted built heap to be %v got %v", want, heap)
+	}
+}
+
+func TestMinHeapify(t *testing.T) {
+	var heap = []int{0, 10, 5, 20}
+
+	want := []int{0, 5, 10, 20}
+	minHeapify(&heap, len(heap)-1, 1)
+
+	if !reflect.DeepEqual(want, heap) {
+		t.Errorf("wanted heap %v got %v", want, heap)
+	}
+}
+
+func TestBuildMinHeap(t *testing.T) {
+	var heap = []int{0, 10, 5, 20, 4, 3, 1, 15}
+
+	want := []int{0, 1, 3, 10, 4, 5, 20, 15}
+	buildMinHeap(&heap, len(heap)-1)
 
 	if !reflect.DeepEqual(want, heap) {
 		t.Errorf("wanted built heap to be %v got %v", want, heap)

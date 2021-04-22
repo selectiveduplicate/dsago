@@ -12,8 +12,7 @@ func parentIndex(i int) int {
 	return i / 2
 }
 
-// converts a heap into a max heap
-func maxHeapify(heap *[]int, heapSize int, i int) {
+func maxHeapify(heap *[]int, heapSize, i int) {
 	var largestNodeIndex int
 
 	left := leftNodeIndex(i)
@@ -42,5 +41,34 @@ func maxHeapify(heap *[]int, heapSize int, i int) {
 func buildMaxHeap(heap *[]int, heapSize int) {
 	for i := heapSize / 2; i >= 1; i-- {
 		maxHeapify(heap, heapSize, i)
+	}
+}
+
+func minHeapify(heap *[]int, heapsize, i int) {
+	var smallestNodeIndex int
+
+	left := leftNodeIndex(i)
+	right := rightNodeIndex(i)
+
+	if left <= heapsize && (*heap)[left] < (*heap)[i] {
+		smallestNodeIndex = left
+	} else {
+		smallestNodeIndex = i
+	}
+
+	if right <= heapsize && (*heap)[right] < (*heap)[smallestNodeIndex] {
+		smallestNodeIndex = right
+	}
+
+	if smallestNodeIndex != i {
+		(*heap)[i], (*heap)[smallestNodeIndex] = (*heap)[smallestNodeIndex], (*heap)[i]
+		minHeapify(heap, heapsize, smallestNodeIndex)
+	}
+}
+
+// builds a min heap from a given heap
+func buildMinHeap(heap *[]int, heapSize int) {
+	for i := heapSize / 2; i >= 1; i-- {
+		minHeapify(heap, heapSize, i)
 	}
 }
