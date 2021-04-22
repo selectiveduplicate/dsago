@@ -72,3 +72,25 @@ func buildMinHeap(heap *[]int, heapSize int) {
 		minHeapify(heap, heapSize, i)
 	}
 }
+
+func heapSortAscending(heap *[]int, heapSize int) {
+	buildMaxHeap(heap, heapSize)
+	for i := heapSize; i > 1; i-- {
+		//swap the first and i-th node i.e. the last node in the heap
+		(*heap)[1], (*heap)[i] = (*heap)[i], (*heap)[1]
+
+		//decrease heap size since don't need to consider
+		//the last node because of the swap
+		heapSize--
+		maxHeapify(heap, heapSize, 1)
+	}
+}
+
+func heapSortDescending(heap *[]int, heapSize int) {
+	buildMinHeap(heap, heapSize)
+	for i := heapSize; i > 1; i-- {
+		(*heap)[1], (*heap)[i] = (*heap)[i], (*heap)[1]
+		heapSize--
+		minHeapify(heap, heapSize, 1)
+	}
+}

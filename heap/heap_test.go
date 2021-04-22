@@ -76,3 +76,25 @@ func TestBuildMinHeap(t *testing.T) {
 		t.Errorf("wanted built heap to be %v got %v", want, heap)
 	}
 }
+
+func TestHeapSortAscending(t *testing.T) {
+	var heap = []int{0, 10, 5, 20, 4, 3, 1, 15}
+
+	want := []int{0, 1, 3, 4, 5, 10, 15, 20}
+	heapSortAscending(&heap, len(heap)-1)
+
+	if !reflect.DeepEqual(want, heap) {
+		t.Errorf("after sorting using max heapify wanted %v got %v", want, heap)
+	}
+}
+
+func TestHeapSortDescending(t *testing.T) {
+	var heap = []int{0, 10, 5, 20, 4, 3, 1, 15}
+
+	want := []int{0, 20, 15, 10, 5, 4, 3, 1}
+	heapSortDescending(&heap, len(heap)-1)
+
+	if !reflect.DeepEqual(want, heap) {
+		t.Errorf("after sorting using min heapify wanted %v got %v", want, heap)
+	}
+}
