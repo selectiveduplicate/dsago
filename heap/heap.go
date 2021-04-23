@@ -1,22 +1,22 @@
 package heap
 
-func leftNodeIndex(i int) int {
+func LeftNodeIndex(i int) int {
 	return 2 * i
 }
 
-func rightNodeIndex(i int) int {
+func RightNodeIndex(i int) int {
 	return 2*i + 1
 }
 
-func parentIndex(i int) int {
+func ParentIndex(i int) int {
 	return i / 2
 }
 
-func maxHeapify(heap *[]int, heapSize, i int) {
+func MaxHeapify(heap *[]int, heapSize, i int) {
 	var largestNodeIndex int
 
-	left := leftNodeIndex(i)
-	right := rightNodeIndex(i)
+	left := LeftNodeIndex(i)
+	right := RightNodeIndex(i)
 
 	// left node is larger than given node
 	if left <= heapSize && (*heap)[left] > (*heap)[i] {
@@ -33,22 +33,22 @@ func maxHeapify(heap *[]int, heapSize, i int) {
 	// if the subtree is already a max heap then we're done
 	if largestNodeIndex != i {
 		(*heap)[i], (*heap)[largestNodeIndex] = (*heap)[largestNodeIndex], (*heap)[i]
-		maxHeapify(heap, heapSize, largestNodeIndex)
+		MaxHeapify(heap, heapSize, largestNodeIndex)
 	}
 }
 
 // builds a max heap from a given heap
 func buildMaxHeap(heap *[]int, heapSize int) {
 	for i := heapSize / 2; i >= 1; i-- {
-		maxHeapify(heap, heapSize, i)
+		MaxHeapify(heap, heapSize, i)
 	}
 }
 
 func minHeapify(heap *[]int, heapsize, i int) {
 	var smallestNodeIndex int
 
-	left := leftNodeIndex(i)
-	right := rightNodeIndex(i)
+	left := LeftNodeIndex(i)
+	right := RightNodeIndex(i)
 
 	if left <= heapsize && (*heap)[left] < (*heap)[i] {
 		smallestNodeIndex = left
@@ -82,7 +82,7 @@ func heapSortAscending(heap *[]int, heapSize int) {
 		//decrease heap size since don't need to consider
 		//the last node because of the swap
 		heapSize--
-		maxHeapify(heap, heapSize, 1)
+		MaxHeapify(heap, heapSize, 1)
 	}
 }
 
