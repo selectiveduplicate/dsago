@@ -1,6 +1,9 @@
-package main
+package binaryTree
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+)
 
 // TreeNode is a node in a tree
 type TreeNode struct {
@@ -29,63 +32,34 @@ func (n *TreeNode) AddRight(r *TreeNode) {
 }
 
 // PreOrder does the preorder traversal
-func PreOrder(root *TreeNode) {
-	fmt.Println(root.data)
+func PreOrder(root *TreeNode, writer io.Writer) {
+	fmt.Fprintf(writer, "%d", root.data)
 	if root.left != nil {
-		PreOrder(root.left)
+		PreOrder(root.left, writer)
 	}
 	if root.right != nil {
-		PreOrder(root.right)
+		PreOrder(root.right, writer)
 	}
 }
 
 // PostOrder does the postorder traversal
-func PostOrder(root *TreeNode) {
+func PostOrder(root *TreeNode, writer io.Writer) {
 	if root.left != nil {
-		PostOrder(root.left)
+		PostOrder(root.left, writer)
 	}
 	if root.right != nil {
-		PostOrder(root.right)
+		PostOrder(root.right, writer)
 	}
-	fmt.Println(root.data)
+	fmt.Fprintf(writer, "%d", root.data)
 }
 
 //InOrder does the inorder traversal
-func InOrder(root *TreeNode) {
+func InOrder(root *TreeNode, writer io.Writer) {
 	if root.left != nil {
-		InOrder(root.left)
+		InOrder(root.left, writer)
 	}
-	fmt.Println(root.data)
+	fmt.Fprintf(writer, "%d", root.data)
 	if root.right != nil {
-		InOrder(root.right)
+		InOrder(root.right, writer)
 	}
-}
-
-// CreateTree creates a tree
-func CreateTree() *TreeNode {
-	root := CreateNode(5)
-	ten := CreateNode(10)
-	twenty := CreateNode(20)
-	root.AddLeft(ten)
-	root.AddRight(twenty)
-
-	seven := CreateNode(7)
-	nine := CreateNode(9)
-	six := CreateNode(6)
-	eight := CreateNode(8)
-	ten.AddLeft(seven)
-	ten.AddRight(nine)
-	twenty.AddLeft(six)
-	twenty.AddRight(eight)
-
-	return root
-}
-
-func main() {
-	tree := CreateTree()
-	PreOrder(tree)
-	fmt.Println("")
-	PostOrder(tree)
-	fmt.Println("")
-	InOrder(tree)
 }
